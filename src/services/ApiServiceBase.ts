@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import { TAnyObject } from '../types/TAnyObject.ts';
 import { IApiRouterParams } from './types/IApiRouterParams.ts';
 import { getApiRouter } from './utils/getApiRouter.ts';
@@ -41,7 +41,7 @@ export abstract class ApiServiceBase {
 	protected get<Response extends TAnyObject>(
 		url = '',
 		{ params, query, ...config }: IAxiosRequestConfig,
-	): Promise<Response> {
+	): Promise<AxiosResponse<Response>> {
 		return this.axios.get(getApiRouter(this.baseUrl + url, { params, query }), config);
 	}
 
@@ -49,7 +49,7 @@ export abstract class ApiServiceBase {
 		url = '',
 		data?: Request,
 		{ params, query, ...config }: IAxiosRequestConfig = {},
-	): Promise<Response> {
+	): Promise<AxiosResponse<Response>> {
 		return this.axios.post(getApiRouter(this.baseUrl + url, { params, query }), data, config);
 	}
 }

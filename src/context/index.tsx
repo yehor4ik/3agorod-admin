@@ -1,10 +1,7 @@
 import { createContext, FC, useReducer, useContext } from 'react';
 import { IState, IStateContextProvider, TDispatch } from './types.ts';
-import { stateReducer } from './reducer.ts';
+import {initialState, stateReducer} from './reducer.ts';
 
-const initialState: IState = {
-	authUser: null,
-};
 
 const StateContext = createContext<{ state: IState; dispatch: TDispatch } | undefined>(undefined);
 

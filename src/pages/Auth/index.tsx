@@ -7,14 +7,24 @@ import { apiAuth } from '../../services/api/Auth/ApiAuth.ts';
 import { FullScreenOverlayLoader } from '../../components/FullScreenOverlayLoader';
 import { HttpError } from '../../services/HttpError.ts';
 import { ILoginResponse } from '../../services/api/Auth/types/ILoginResponse.ts';
+import {useStateContext} from "../../context";
+import {setUserInfo} from "../../context/actions.ts";
+import {ConstPaths} from "../../navigation/ConstPaths.ts";
+import { useNavigate } from "react-router-dom";
 
 export const Login: FC = () => {
 	const [form] = Form.useForm<ILoginRequest>();
+  const {dispatch} = useStateContext();
+  const { setFields } = form;
+  const navigate = useNavigate()
 
-	const { mutate, isLoading } = useMutation<ILoginResponse | HttpError, HttpError, ILoginRequest>({
+	const { mutate, isLoading } = useMutation<ILoginResponse, HttpError, ILoginRequest>({
 		mutationFn: (query) => apiAuth.login(query),
-		onError: (error) => console.log(error),
-		onSuccess: (data) => console.log(data),
+		onError: (error) => setFields(error.getArrayFormatFormError()),
+		onSuccess: (data) => {
+      dispatch(setUserInfo(data));
+      navigate(ConstPaths.HOME);
+    },
 	});
 
 	const onSubmit = (values: ILoginRequest) => {
