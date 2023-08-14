@@ -22,8 +22,7 @@ export class HttpError extends Error {
   }
 
   setMessage(message: string | Record<string, string>): void {
-    const errorMessage = typeof message !== "string" ? message.err : message;
-    this.message = errorMessage;
+    this.message = typeof message !== "string" ? message.err : message;
   }
 
   getArrayFormatFormError(): Pick<FieldData, 'name' | 'errors'>[] {
