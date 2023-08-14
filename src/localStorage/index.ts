@@ -10,4 +10,8 @@ export class Storage  {
   static setUser(user: ILoginResponse): void {
     localStorage.setItem(LocalStorageKey.user, JSON.stringify(user));
   }
+
+  static removeUse() {
+    localStorage.removeItem(LocalStorageKey.user)
+  }
 }

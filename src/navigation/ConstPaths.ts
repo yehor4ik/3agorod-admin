@@ -1,4 +1,7 @@
 export enum ConstPaths {
   HOME = '/',
-  LOGIN = '/login'
+  LOGIN = 'login',
+  PRODUCT = 'product',
+  COLLECTION = 'collection',
+  CREATE = 'create',
 }

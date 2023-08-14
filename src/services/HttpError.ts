@@ -1,12 +1,14 @@
 import {AxiosError} from 'axios';
 import {FieldData} from "rc-field-form/es/interface";
 
-export class HttpError {
+export class HttpError extends Error {
   status?: number;
-  message: Record<string, string> | string;
+  // @ts-ignore
+  message: string | Record<string, string>
   payload?: any;
 
   constructor(error: unknown) {
+    super()
     if (error instanceof AxiosError && error?.response) {
       const {status, data, ...payload} = error.response;
       this.status = status;
@@ -19,13 +21,14 @@ export class HttpError {
     this.message = (error as Error).message;
   }
 
-  setMessage(message: Record<string, string> | string) {
-    this.message = message;
+  setMessage(message: string | Record<string, string>): void {
+    const errorMessage = typeof message !== "string" ? message.err : message;
+    this.message = errorMessage;
   }
 
   getArrayFormatFormError(): Pick<FieldData, 'name' | 'errors'>[] {
     if (typeof this.message === 'object') {
-      return Object.entries(this.message).map(([key, value]) => {
+      return Object.entries(this.message as Record<string, string>).map(([key, value]) => {
         return {
           name: key,
           errors: [value]

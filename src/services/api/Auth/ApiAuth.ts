@@ -16,9 +16,7 @@ class ApiAuth extends ApiServiceBase {
       const newError = new HttpError(error);
 
       if (newError.status === 401) {
-        const errorMessage = typeof newError.message !== "string" ? newError.message.err : newError.message;
-
-        newError.setMessage({email: errorMessage})
+        newError.setMessage(newError.message)
       }
 
       throw newError;
