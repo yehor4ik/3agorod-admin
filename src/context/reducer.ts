@@ -1,11 +1,11 @@
 import { IAction, IState } from './types.ts';
-import {Storage} from "../localStorage";
+import { Storage } from '../localStorage';
 
 export const initialState: IState = {
-  authUser: Storage.getUser(),
+	authUser: Storage.getUser(),
 };
 
-export const stateReducer = (state = initialState, action: IAction) => {
+export const stateReducer = (state = initialState, action: IAction): IState => {
 	switch (action.type) {
 		case 'SET_USER': {
 			return {

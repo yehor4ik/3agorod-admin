@@ -1,4 +1,4 @@
 export interface IResponseDate {
-  createdAt: Date;
-  updatedAt: Date;
+	createdAt: Date;
+	updatedAt: Date;
 }

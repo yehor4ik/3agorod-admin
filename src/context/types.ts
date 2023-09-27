@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ILoginResponse } from '../services/api/Auth/types/ILoginResponse.ts';
 
-export const SET_USER = 'SET_USER'
+export const SET_USER = 'SET_USER';
 
 export interface IState {
 	authUser: ILoginResponse | null;
