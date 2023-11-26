@@ -3,5 +3,6 @@ export enum ConstPaths {
 	LOGIN = 'login',
 	PRODUCT = 'product',
 	COLLECTION = 'collection',
+	CHAT = 'chat',
 	CREATE = 'create',
 }

@@ -5,6 +5,7 @@ import { ConstPaths } from './navigation/ConstPaths.ts';
 import { ProductsList } from './pages/ProductsList';
 import { CollectionList } from './pages/CollectionsList';
 import './App.less';
+import { Chat } from './pages/Chat/inpex.tsx';
 
 export const App: FC = () => {
 	const location = useLocation();
@@ -22,6 +23,8 @@ export const App: FC = () => {
 					<Route path={`/${ConstPaths.PRODUCT}/*`} element={<ProductsList />} />
 
 					<Route path={`/${ConstPaths.COLLECTION}/*`} element={<CollectionList />} />
+
+					<Route path={`/${ConstPaths.CHAT}/*`} element={<Chat />} />
 				</Routes>
 			</div>
 		</div>

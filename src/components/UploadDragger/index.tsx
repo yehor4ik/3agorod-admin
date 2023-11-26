@@ -11,9 +11,10 @@ const { Dragger } = Upload;
 interface IProps {
 	serError: (error: FieldData[]) => void;
 	className?: string;
+	setResponseValue: (file: IImageCreateResponse) => void;
 }
 
-export const UploadDragger: FC<IProps> = ({ serError, className }) => {
+export const UploadDragger: FC<IProps> = ({ serError, className, setResponseValue }) => {
 	const props: UploadProps = {
 		name: 'file',
 		multiple: false,
@@ -26,7 +27,10 @@ export const UploadDragger: FC<IProps> = ({ serError, className }) => {
 						!!onProgress && onProgress({ percent: (event.loaded / (event?.total ?? 0)) * 100 });
 					},
 				});
-				!!onSuccess && onSuccess(response);
+				if (onSuccess) {
+					setResponseValue(response);
+					onSuccess(response);
+				}
 			} catch (e: any) {
 				if (onError) {
 					if (e instanceof ImageHttpError) {
